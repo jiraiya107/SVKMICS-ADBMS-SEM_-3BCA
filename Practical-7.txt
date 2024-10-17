@@ -1,0 +1,194 @@
+1. Write a PL/SQL program to arrange the number of two variable in such a
+way that the small number will store in num_small variable and large
+number will store in num_large variable.
+
+DECLARE
+	NUM_SMALL NUMBER :=&V_NUM_S;
+	NUM_LARGE NUMBER :=&V_NUM_L;
+	NUM_TEMP NUMBER;
+BEGIN
+	IF(NUM_SMALL) > NUM_LARGE THEN
+		NUM_TEMP :=NUM_SMALL;
+		NUM_SMALL :=NUM_LARGE;
+		NUM_LARGE :=NUM_TEMP;
+		dbms_output.put_line(NUM_LARGE|| 'is stored in num_large');
+		dbms_output.put_line(NUM_small|| 'and');
+		dbms_output.put_line(NUM_SMALL|| 'is stored in num_small');
+	end if;
+end;
+/
+
+OUTPUT:
+Enter value for v_num_s: 4
+old   2: NUM_SMALL NUMBER :=&V_NUM_S;
+new   2: NUM_SMALL NUMBER :=4;
+Enter value for v_num_l: 5
+old   3: NUM_LARGE NUMBER :=&V_NUM_L;
+new   3: NUM_LARGE NUMBER :=5;
+
+2. Write a PL/SQL program to check whether a number is even or odd.
+
+DECLARE
+	v_num NUMBER := &sv_user_num;
+BEGIN
+	IF MOD(V_NUM,2)=0 THEN
+		DBMS_OUTPUT.PUT_LINE (v_num||’ is even number’);
+	ELSE
+		DBMS_OUTPUT.PUT_LINE (v_num||’ is odd number’);
+	END IF;
+		DBMS_OUTPUT.PUT_LINE ('Done’);
+END;
+/
+
+OUTPUT:
+OUTPUT :
+Enter value for sv_user_num: 5
+old   2: v_num NUMBER := &sv_user_num;
+new   2: v_num NUMBER := 5;
+5 is odd number
+Done
+
+3. Write a PL/SQL program to count the number of employees in department
+50 and check whether this department have any vacancies or not. There are
+45 vacancies in this department. 
+
+DECLARE 
+	TOTAL_EMP NUMBER;
+BEGIN
+	SELECT COUNT(*)
+	INTO TOTAL_EMP
+	FROM EMPLOYEES E
+		JOIN DEPARTMENTS D
+		ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	WHERE E.DEPARTMENT_ID=50;
+	DBMS_OUTPUT.PUT_LINE ('THE EMPLOYEE ARE IN THE DEPARTMENT 50:'||TO_CHAR(TOTAL_EMP));
+IF TOTAL_EMP >=45 THEN
+	DBMS_OUTPUT.PUT_LINE ('THERE ARE NO VACANCIES IN THE DEPARTMENT 50.');
+ELSE
+	DBMS_OUTPUT.PUT_LINE ('THERE ARE SOME VACANCIES IN THE DEPARTMENT 50.');	
+END IF;
+END;
+/ 
+
+OUTPUT:
+THE EMPLOYEE ARE IN THE DEPARTMENT 50:45
+THERE ARE NO VACANCIES IN THE DEPARTMENT 50.
+
+4. Write a PL/SQL program to display the description against a grade.	
+
+DECLARE 
+   grade char(1) := '&sv_grade'; 
+BEGIN 
+   CASE grade 
+      when 'A' then 
+		dbms_output.put_line('Excellent'); 
+      when 'B' then 
+		dbms_output.put_line('Very good'); 
+      when 'C' then 
+		dbms_output.put_line('Well done'); 
+      when 'D' then 
+		dbms_output.put_line('You passed'); 
+      when 'F' then 
+		dbms_output.put_line('Better try again'); 
+      else 
+		dbms_output.put_line('No such grade'); 
+   END CASE; 
+END; 
+/ 
+OUTPUT:
+Enter value for sv_grade: F
+old   2:    grade char(1) := '&sv_grade';
+new   2:    grade char(1) := 'F';
+Better try again
+
+5. Write a PL/SQL program to check whether a given number is positive,
+negative or zero.
+
+DECLARE 
+   	a number(3):=2;
+BEGIN 
+   	IF ( a = 0 ) THEN 
+      		dbms_output.put_line('NUMBER IS 0' ); 
+  	ELSIF ( a >0 ) THEN 
+      		dbms_output.put_line('NUMBER is Positive' ); 
+   	ELSIF ( a<0) THEN 
+      		dbms_output.put_line('NUMBER is Negative' ); 
+	END IF; 
+   	
+END; 
+/ 
+
+OUTPUT:
+NUMBER is Positive
+
+6. Write a PL/SQL program to check whether a given character is letter or
+digit.
+
+DECLARE
+	v_letter CHAR(1) := '&sv_letter';
+BEGIN
+	IF (v_letter>= 'A' AND v_letter<= 'Z') OR (v_letter>= 'a' AND v_letter<= 'z') THEN
+		DBMS_OUTPUT.PUT_LINE ('This is a letter');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE ('This is not a letter');
+		IF v_letter BETWEEN '0' and '9' THEN
+			DBMS_OUTPUT.PUT_LINE ('This is a number');
+		ELSE
+			DBMS_OUTPUT.PUT_LINE ('This is not a number');
+		END IF;
+	END IF;
+END;
+/
+
+OUTPUT:
+Enter value for sv_letter: 3
+old   2: v_letter CHAR(1) := '&sv_letter';
+new   2: v_letter CHAR(1) := '3';
+This is not a letter
+This is a number
+
+7. Write a PL/SQL program to check whether a date falls on weekend i.e.
+SATURDAY or SUNDAY.
+
+
+DECLARE 
+	DT1 DATE :=TO_DATE('&NEW_DT','DD-MON-YYYY');
+	GET_DAY VARCHAR2(15);
+BEGIN 
+	GET_DAY :=RTRIM(TO_CHAR(DT1,'DAY'));
+	IF GET_DAY IN ('SATURDAY','SUNDAY')THEN
+	DBMS_OUTPUT.PUT_LINE('THE DAY OF THE GIVEN DATE IS '||GET_DAY||'AND IT FALLS ON WEEKEND');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('THE DAY OF THE GIVEN DATE IS '||GET_DAY||'AND IT DONT FALLS ON WEEKEND');
+	END IF;
+	DBMS_OUTPUT.PUT_LINE('EXECUTION DONE SUCCESSFULLY.');
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

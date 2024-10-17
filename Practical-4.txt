@@ -1,0 +1,267 @@
+1. Display first name, salary, and round the salary to thousands.
+
+SQL> SELECT FIRST_NAME,SALARY,ROUND(SALARY, -3) FROM EMPLOYEES;
+
+FIRST_NAME               SALARY ROUND(SALARY,-3)
+-------------------- ---------- ----------------
+Steven                    24000            24000
+Neena                     17000            17000
+Lex                       17000            17000
+Alexander                  9000             9000
+Bruce                      6000             6000
+David                      4800             5000
+Valli                      4800             5000
+Diana                      4200             4000
+Nancy                     12008            12000
+Daniel                     9000             9000
+John                       8200             8000
+
+2. Display employees who joined in the month of May.
+
+SQL> SELECT * FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE, 'MON')='MAY';
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        104 Bruce                Ernst
+BERNST                    590.423.4568         21-MAY-07 IT_PROG          6000
+                      103            60
+
+        115 Alexander            Khoo
+AKHOO                     515.127.4562         18-MAY-03 PU_CLERK         3100
+                      114            30
+
+3. Display first name and date of first salary of the employees.
+
+SQL> SELECT FIRST_NAME,HIRE_DATE,LAST_DAY(HIRE_DATE)+1 FROM EMPLOYEES;
+
+FIRST_NAME           HIRE_DATE LAST_DAY(
+-------------------- --------- ---------
+Steven               17-JUN-03 01-JUL-03
+Neena                21-SEP-05 01-OCT-05
+Lex                  13-JAN-01 01-FEB-01
+Alexander            03-JAN-06 01-FEB-06
+Bruce                21-MAY-07 01-JUN-07
+David                25-JUN-05 01-JUL-05
+Valli                05-FEB-06 01-MAR-06
+Diana                07-FEB-07 01-MAR-07
+Nancy                17-AUG-02 01-SEP-02
+Daniel               16-AUG-02 01-SEP-02
+John                 28-SEP-05 01-OCT-05
+
+4. Display first name and experience of the employees.
+
+SQL> SELECT FIRST_NAME,HIRE_DATE,FLOOR((SYSDATE-HIRE_DATE)/365) FROM EMPLOYEES;
+
+FIRST_NAME           HIRE_DATE FLOOR((SYSDATE-HIRE_DATE)/365)
+-------------------- --------- ------------------------------
+Steven               17-JUN-03                             21
+Neena                21-SEP-05                             18
+Lex                  13-JAN-01                             23
+Alexander            03-JAN-06                             18
+Bruce                21-MAY-07                             17
+David                25-JUN-05                             19
+Valli                05-FEB-06                             18
+Diana                07-FEB-07                             17
+Nancy                17-AUG-02                             21
+Daniel               16-AUG-02                             21
+John                 28-SEP-05                             18
+
+5. Display first name of employees who joined in 2001.
+
+SQL> SELECT FIRST_NAME,HIRE_DATE FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'YYYY')=2001;
+
+FIRST_NAME           HIRE_DATE
+-------------------- ---------
+Lex                  13-JAN-01
+
+6. Display first name and last name after converting the first letter of each name to
+upper case and the rest to lower case.
+
+SQL> SELECT INITCAP(FIRST_NAME),INITCAP(LAST_NAME) FROM EMPLOYEES;
+
+INITCAP(FIRST_NAME)  INITCAP(LAST_NAME)
+-------------------- -------------------------
+Ellen                Abel
+Sundar               Ande
+Mozhe                Atkinson
+David                Austin
+Hermann              Baer
+Shelli               Baida
+Amit                 Banda
+Elizabeth            Bates
+Sarah                Bell
+David                Bernstein
+Laura                Bissot
+
+7. Display the first word in job title.
+
+SQL> SELECT JOB_TITLE,SUBSTR(JOB_TITLE,1,INSTR(JOB_TITLE,'  ')-1) FROM JOBS;
+
+JOB_TITLE
+-----------------------------------
+SUBSTR(JOB_TITLE,1,INSTR(JOB_TITLE,'')-1)
+--------------------------------------------------------------------------------
+President
+
+
+Administration Vice President
+
+
+Administration Assistant
+
+
+
+JOB_TITLE
+-----------------------------------
+SUBSTR(JOB_TITLE,1,INSTR(JOB_TITLE,'')-1)
+--------------------------------------------------------------------------------
+Finance Manager
+
+
+Accountant
+
+
+Accounting Manager
+
+8. Display the length of first name for employees where last name contain
+character ‘b’ after 3rd position.
+
+SQL> SELECT FIRST_NAME,LAST_NAME FROM EMPLOYEES WHERE INSTR(LAST_NAME,'b')>3;
+
+FIRST_NAME           LAST_NAME
+-------------------- -------------------------
+Gerald               Cambrault
+Nanette              Cambrault
+Nancy                Greenberg
+Valli                Pataballa
+
+9. Display first name in upper case and email address in lower case for employees
+where the first name and email address are same irrespective of the case.
+
+SQL> SELECT UPPER(FIRST_NAME), LOWER(EMAIL) FROM EMPLOYEES WHERE UPPER(FIRST_NAME)=UPPER(EMAIL);
+
+no rows selected
+
+10. Display employees who joined in the current year.
+
+SQL> SELECT * FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'YYYY')=TO_CHAR(SYSDATE,'YYYY');
+
+no rows selected
+
+11. Display the number of days between system date and 1st January 2011.
+
+SQL> SELECT SYSDATE - TO_DATE('01-JAN-2011') FROM DUAL;
+
+SYSDATE-TO_DATE('01-JAN-2011')
+------------------------------
+                     4945.4098
+
+12. Display how many employees joined in each month of the current year.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MM'),COUNT(*) FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'YYYY')=TO_CHAR(SYSDATE,'YYYY') GROUP BY TO_CHAR(HIRE_DATE,'MM');
+
+no rows selected
+
+13. Display number of employees joined after 15th of the month.
+
+SQL> SELECT COUNT(*) FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'DD') > 15;
+
+  COUNT(*)
+----------
+        57
+
+14. Display years in which more than 10 employees joined.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'YYYY') FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YYYY')
+  2  HAVING COUNT(EMPLOYEE_ID) > 10;
+
+TO_C
+----
+2005
+2008
+2007
+2006
+
+15. Display department ID, year, and Number of employees joined.
+
+SQL> SELECT DEPARTMENT_ID,TO_CHAR(HIRE_DATE,'YYYY'),COUNT(EMPLOYEE_ID) FROM EMPLOYEES GROUP BY DEPARTMENT_ID,TO_CHAR(HIRE_DATE,'YYYY') ORDER BY DEPARTMENT_ID;
+
+DEPARTMENT_ID TO_C COUNT(EMPLOYEE_ID)
+------------- ---- ------------------
+           10 2003                  1
+           20 2004                  1
+           20 2005                  1
+           30 2002                  1
+           30 2003                  1
+           30 2005                  2
+           30 2006                  1
+           30 2007                  1
+           40 2002                  1
+           50 2003                  3
+           50 2004                  4
+
+16. Write a query to display phone_number in the employees table, where the
+phone_number the substring '124' will be replaced by '999'.
+
+SQL> UPDATE EMPLOYEES SET PHONE_NUMBER = REPLACE(PHONE_NUMBER,'124','999') WHERE PHONE_NUMBER LIKE '%124%';
+
+14 rows updated.
+
+17. Write a query to append '@example.com' to email field.
+
+SQL> UPDATE EMPLOYEES SET EMAIL = CONCAT(EMAIL,'@EXAMPLE.COM');
+
+107 rows updated.
+
+18.Write a query to get the employee id, email id (discard the last three characters).
+employee_id Email_ID
+100 SK
+101 NKOCH
+102 LDEH
+103 AHUN
+104 BER
+105 DAUS
+
+SQL> SELECT EMPLOYEE_ID, REVERSE(SUBSTR(REVERSE(EMAIL), 4)) AS EMAIL_ID FROM EMPLOYEES;
+
+EMPLOYEE_ID
+-----------
+EMAIL_ID
+--------------------------------------------------------------------------------
+        100
+SKING@EXAMPLE.
+
+        101
+NKOCHHAR@EXAMPLE.
+
+        102
+LDEHAAN@EXAMPLE.
+
+SQL> SELECT EMPLOYEE_ID, REVERSE(SUBSTR(REVERSE(EMAIL), 4)) AS EMAIL_ID FROM EMPLOYEES;
+
+EMPLOYEE_ID
+-----------
+EMAIL_ID
+--------------------------------------------------------------------------------
+        100
+SKING@EXAMPLE.
+
+        101
+NKOCHHAR@EXAMPLE.
+
+        102
+LDEHAAN@EXAMPLE.
+
+19. Write a query to extract the last 4 character of phone numbers.
+
+
+
+
+
+
+
+

@@ -1,0 +1,898 @@
+1) SQL> SELECT FIRST_NAME ||''|| LAST_NAME AS FULL_NAME,SALARY FROM EMPLOYEES WHERE SALARY<6000;
+
+FULL_NAME                                         SALARY
+--------------------------------------------- ----------
+DavidAustin                                         4800
+ValliPataballa                                      4800
+DianaLorentz                                        4200
+AlexanderKhoo                                       3100
+ShelliBaida                                         2900
+SigalTobias                                         2800
+GuyHimuro                                           2600
+KarenColmenares                                     2500
+KevinMourgos                                        5800
+JuliaNayer                                          3200
+IreneMikkilineni                                    2700
+
+FULL_NAME                                         SALARY
+--------------------------------------------- ----------
+JamesLandry                                         2400
+StevenMarkle                                        2200
+LauraBissot                                         3300
+MozheAtkinson                                       2800
+JamesMarlow                                         2500
+TJOlson                                             2100
+JasonMallin                                         3300
+MichaelRogers                                       2900
+KiGee                                               2400
+HazelPhiltanker                                     2200
+RenskeLadwig                                        3600
+
+FULL_NAME                                         SALARY
+--------------------------------------------- ----------
+StephenStiles                                       3200
+JohnSeo                                             2700
+JoshuaPatel                                         2500
+TrennaRajs                                          3500
+CurtisDavies                                        3100
+RandallMatos                                        2600
+PeterVargas                                         2500
+WinstonTaylor                                       3200
+JeanFleaur                                          3100
+MarthaSullivan                                      2500
+GirardGeoni                                         2800
+
+FULL_NAME                                         SALARY
+--------------------------------------------- ----------
+NanditaSarchand                                     4200
+AlexisBull                                          4100
+JuliaDellinger                                      3400
+AnthonyCabrio                                       3000
+KellyChung                                          3800
+JenniferDilly                                       3600
+TimothyGates                                        2900
+RandallPerkins                                      2500
+SarahBell                                           4000
+BritneyEverett                                      3900
+SamuelMcCain                                        3200
+
+FULL_NAME                                         SALARY
+--------------------------------------------- ----------
+VanceJones                                          2800
+AlanaWalsh                                          3100
+KevinFeeney                                         3000
+DonaldOConnell                                      2600
+DouglasGrant                                        2600
+JenniferWhalen                                      4400
+
+50 rows selected.
+
+2) SQL> SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID IS NULL;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        178 Kimberely            Grant
+KGRANT                    011.44.1644.429263   24-MAY-07 SA_REP           7000
+           .15        149
+
+
+3)  SQL> SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_NAME='Marketing';
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           20 Marketing                             201        1800
+
+
+4) SQL> SELECT FIRST_NAME ||''|| LAST_NAME AS FULL_NAME,HIRE_DATE,SALARY,DEPARTMENT_ID FROM EMPLOYEES WHERE FIRST_NAME NOT LIKE '%M%' ORDER BY DEPARTMENT_ID;
+
+FULL_NAME                                     HIRE_DATE     SALARY DEPARTMENT_ID
+--------------------------------------------- --------- ---------- -------------
+CharlesJohnson                                04-JAN-08       6200            80
+StevenKing                                    17-JUN-03      24000            90
+NeenaKochhar                                  21-SEP-05      17000            90
+LexDe Haan                                    13-JAN-01      17000            90
+
+100 rows selected.
+
+5) SQL> SELECT * FROM EMPLOYEES WHERE SALARY BETWEEN 8000 AND 12000 AND COMMISSION_PCT IS NOT NULL OR DEPARTMENT_ID NOT IN(40,120,70) AND HIRE_DATE<'05-JUNE-97';
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        147 Alberto              Errazuriz
+AERRAZUR                  011.44.1344.429278   10-MAR-05 SA_MAN          12000
+            .3        100            80
+
+        148 Gerald               Cambrault
+GCAMBRAU                  011.44.1344.619268   15-OCT-07 SA_MAN          11000
+            .3        100            80
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+
+        149 Eleni                Zlotkey
+EZLOTKEY                  011.44.1344.429018   29-JAN-08 SA_MAN          10500
+            .2        100            80
+
+        150 Peter                Tucker
+PTUCKER                   011.44.1344.129268   30-JAN-05 SA_REP          10000
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+            .3        145            80
+
+        151 David                Bernstein
+DBERNSTE                  011.44.1344.345268   24-MAR-05 SA_REP           9500
+           .25        145            80
+
+        152 Peter                Hall
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+PHALL                     011.44.1344.478968   20-AUG-05 SA_REP           9000
+           .25        145            80
+
+        153 Christopher          Olsen
+COLSEN                    011.44.1344.498718   30-MAR-06 SA_REP           8000
+            .2        145            80
+
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        156 Janette              King
+JKING                     011.44.1345.429268   30-JAN-04 SA_REP          10000
+           .35        146            80
+
+        157 Patrick              Sully
+PSULLY                    011.44.1345.929268   04-MAR-04 SA_REP           9500
+           .35        146            80
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+
+        158 Allan                McEwen
+AMCEWEN                   011.44.1345.829268   01-AUG-04 SA_REP           9000
+           .35        146            80
+
+        159 Lindsey              Smith
+LSMITH                    011.44.1345.729268   10-MAR-05 SA_REP           8000
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+            .3        146            80
+
+        162 Clara                Vishney
+CVISHNEY                  011.44.1346.129268   11-NOV-05 SA_REP          10500
+           .25        147            80
+
+        163 Danielle             Greene
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+DGREENE                   011.44.1346.229268   19-MAR-07 SA_REP           9500
+           .15        147            80
+
+        168 Lisa                 Ozer
+LOZER                     011.44.1343.929268   11-MAR-05 SA_REP          11500
+           .25        148            80
+
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        169 Harrison             Bloom
+HBLOOM                    011.44.1343.829268   23-MAR-06 SA_REP          10000
+            .2        148            80
+
+        170 Tayler               Fox
+TFOX                      011.44.1343.729268   24-JAN-06 SA_REP           9600
+            .2        148            80
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+
+        174 Ellen                Abel
+EABEL                     011.44.1644.429267   11-MAY-04 SA_REP          11000
+            .3        149            80
+
+        175 Alyssa               Hutton
+AHUTTON                   011.44.1644.429266   19-MAR-05 SA_REP           8800
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+           .25        149            80
+
+        176 Jonathon             Taylor
+JTAYLOR                   011.44.1644.429265   24-MAR-06 SA_REP           8600
+            .2        149            80
+
+        177 Jack                 Livingston
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+JLIVINGS                  011.44.1644.429264   23-APR-06 SA_REP           8400
+            .2        149            80
+
+
+20 rows selected.
+
+6) SQL> SELECT FIRST_NAME ||''|| LAST_NAME AS FULL_NAME,PHONE_NUMBER ||'-'|| EMAIL AS CONTACT_DETAILS,SALARY AS REMUNERATION FROM EMPLOYEES WHERE SALARY BETWEEN 9000 AND 17000;
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+NeenaKochhar
+515.123.4568-NKOCHHAR                                 17000
+
+LexDe Haan
+515.123.4569-LDEHAAN                                  17000
+
+AlexanderHunold
+590.423.4567-AHUNOLD                                   9000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+NancyGreenberg
+515.124.4569-NGREENBE                                 12008
+
+DanielFaviet
+515.124.4169-DFAVIET                                   9000
+
+DenRaphaely
+515.127.4561-DRAPHEAL                                 11000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+JohnRussell
+011.44.1344.429268-JRUSSEL                            14000
+
+KarenPartners
+011.44.1344.467268-KPARTNER                           13500
+
+AlbertoErrazuriz
+011.44.1344.429278-AERRAZUR                           12000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+GeraldCambrault
+011.44.1344.619268-GCAMBRAU                           11000
+
+EleniZlotkey
+011.44.1344.429018-EZLOTKEY                           10500
+
+PeterTucker
+011.44.1344.129268-PTUCKER                            10000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+DavidBernstein
+011.44.1344.345268-DBERNSTE                            9500
+
+PeterHall
+011.44.1344.478968-PHALL                               9000
+
+JanetteKing
+011.44.1345.429268-JKING                              10000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+PatrickSully
+011.44.1345.929268-PSULLY                              9500
+
+AllanMcEwen
+011.44.1345.829268-AMCEWEN                             9000
+
+ClaraVishney
+011.44.1346.129268-CVISHNEY                           10500
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+DanielleGreene
+011.44.1346.229268-DGREENE                             9500
+
+LisaOzer
+011.44.1343.929268-LOZER                              11500
+
+HarrisonBloom
+011.44.1343.829268-HBLOOM                             10000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+TaylerFox
+011.44.1343.729268-TFOX                                9600
+
+EllenAbel
+011.44.1644.429267-EABEL                              11000
+
+MichaelHartstein
+515.123.5555-MHARTSTE                                 13000
+
+
+FULL_NAME
+---------------------------------------------
+CONTACT_DETAILS                                REMUNERATION
+---------------------------------------------- ------------
+HermannBaer
+515.123.8888-HBAER                                    10000
+
+ShelleyHiggins
+515.123.8080-SHIGGINS                                 12008
+
+
+26 rows selected.
+
+7) SQL> SELECT FIRST_NAME ||''|| LAST_NAME AS FULL_NAME,JOB_ID,HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '05-NOVEMBER-07' AND '05-JULY-09';
+
+FULL_NAME                                     JOB_ID     HIRE_DATE
+--------------------------------------------- ---------- ---------
+LuisPopp                                      FI_ACCOUNT 07-DEC-07
+KevinMourgos                                  ST_MAN     16-NOV-07
+StevenMarkle                                  ST_CLERK   08-MAR-08
+KiGee                                         ST_CLERK   12-DEC-07
+HazelPhiltanker                               ST_CLERK   06-FEB-08
+EleniZlotkey                                  SA_MAN     29-JAN-08
+OliverTuvault                                 SA_REP     23-NOV-07
+MatteaMarvins                                 SA_REP     24-JAN-08
+DavidLee                                      SA_REP     23-FEB-08
+SundarAnde                                    SA_REP     24-MAR-08
+AmitBanda                                     SA_REP     21-APR-08
+
+FULL_NAME                                     JOB_ID     HIRE_DATE
+--------------------------------------------- ---------- ---------
+SunditaKumar                                  SA_REP     21-APR-08
+CharlesJohnson                                SA_REP     04-JAN-08
+GirardGeoni                                   SH_CLERK   03-FEB-08
+RandallPerkins                                SH_CLERK   19-DEC-07
+DouglasGrant                                  SH_CLERK   13-JAN-08
+
+16 rows selected.
+
+8) SQL> SELECT FIRST_NAME ||''|| LAST_NAME AS FULL_NAME,SALARY,MANAGER_ID FROM EMPLOYEES WHERE MANAGER_ID IS NOT NULL;
+
+FULL_NAME                                         SALARY MANAGER_ID
+--------------------------------------------- ---------- ----------
+NeenaKochhar                                       17000        100
+LexDe Haan                                         17000        100
+AlexanderHunold                                     9000        102
+BruceErnst                                          6000        103
+DavidAustin                                         4800        103
+
+106 rows selected.
+
+9) SQL> select * from employees where HIRE_DATE < '21-JUNE-02';
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+        102 Lex                  De Haan
+LDEHAAN                   515.123.4569         13-JAN-01 AD_VP           17000
+                      100            90
+
+        203 Susan                Mavris
+SMAVRIS                   515.123.7777         07-JUN-02 HR_REP           6500
+                      101            40
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+
+        204 Hermann              Baer
+HBAER                     515.123.8888         07-JUN-02 PR_REP          10000
+                      101            70
+
+        205 Shelley              Higgins
+SHIGGINS                  515.123.8080         07-JUN-02 AC_MGR          12008
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+EMAIL                     PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY
+------------------------- -------------------- --------- ---------- ----------
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+-------------- ---------- -------------
+                      101           110
+
+        206 William              Gietz
+WGIETZ                    515.123.8181         07-JUN-02 AC_ACCOUNT       8300
+                      205           110
+
+10) SQL> SELECT FIRST_NAME,LAST_NAME,EMAIL,SALARY,MANAGER_ID FROM EMPLOYEES WHERE MANAGER_ID IN (120,103,145);
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+Bruce                Ernst                     BERNST
+      6000        103
+
+David                Austin                    DAUSTIN
+      4800        103
+
+Valli                Pataballa                 VPATABAL
+      4800        103
+
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+Diana                Lorentz                   DLORENTZ
+      4200        103
+
+Julia                Nayer                     JNAYER
+      3200        120
+
+Irene                Mikkilineni               IMIKKILI
+      2700        120
+
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+James                Landry                    JLANDRY
+      2400        120
+
+Steven               Markle                    SMARKLE
+      2200        120
+
+Winston              Taylor                    WTAYLOR
+      3200        120
+
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+Jean                 Fleaur                    JFLEAUR
+      3100        120
+
+Martha               Sullivan                  MSULLIVA
+      2500        120
+
+Girard               Geoni                     GGEONI
+      2800        120
+
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+Peter                Tucker                    PTUCKER
+     10000        145
+
+David                Bernstein                 DBERNSTE
+      9500        145
+
+Peter                Hall                      PHALL
+      9000        145
+
+
+FIRST_NAME           LAST_NAME                 EMAIL
+-------------------- ------------------------- -------------------------
+    SALARY MANAGER_ID
+---------- ----------
+Christopher          Olsen                     COLSEN
+      8000        145
+
+Nanette              Cambrault                 NCAMBRAU
+      7500        145
+
+Oliver               Tuvault                   OTUVAULT
+      7000        145
+
+
+18 rows selected.
+
+11) SQL> SELECT FIRST_NAME || '' || LAST_NAME AS FULL_NAME,HIRE_DATE,COMMISSION_PCT,EMAIL || '-' || PHONE_NUMBER AS CONTACT_DETAILS,SALARY FROM EMPLOYEES WHERE SALARY>11000 OR PHONE_NUMBER LIKE '______3%' ORDER BY FIRST_NAME;
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+AdamFripp                                     10-APR-05
+AFRIPP-650.123.2234                                  8200
+
+AlbertoErrazuriz                              10-MAR-05             .3
+AERRAZUR-011.44.1344.429278                         12000
+
+AlexanderHunold                               03-JAN-06
+AHUNOLD-590.423.4567                                 9000
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+BruceErnst                                    21-MAY-07
+BERNST-590.423.4568                                  6000
+
+DavidAustin                                   25-JUN-05
+DAUSTIN-590.423.4569                                 4800
+
+DianaLorentz                                  07-FEB-07
+DLORENTZ-590.423.5567                                4200
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+HermannBaer                                   07-JUN-02
+HBAER-515.123.8888                                  10000
+
+JenniferWhalen                                17-SEP-03
+JWHALEN-515.123.4444                                 4400
+
+JohnRussell                                   01-OCT-04             .4
+JRUSSEL-011.44.1344.429268                          14000
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+KarenPartners                                 05-JAN-05             .3
+KPARTNER-011.44.1344.467268                         13500
+
+KevinMourgos                                  16-NOV-07
+KMOURGOS-650.123.5234                                5800
+
+LexDe Haan                                    13-JAN-01
+LDEHAAN-515.123.4569                                17000
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+LisaOzer                                      11-MAR-05            .25
+LOZER-011.44.1343.929268                            11500
+
+MatthewWeiss                                  18-JUL-04
+MWEISS-650.123.1234                                  8000
+
+MichaelHartstein                              17-FEB-04
+MHARTSTE-515.123.5555                               13000
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+NancyGreenberg                                17-AUG-02
+NGREENBE-515.124.4569                               12008
+
+NeenaKochhar                                  21-SEP-05
+NKOCHHAR-515.123.4568                               17000
+
+PatFay                                        17-AUG-05
+PFAY-603.123.6666                                    6000
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+PayamKaufling                                 01-MAY-03
+PKAUFLIN-650.123.3234                                7900
+
+ShantaVollman                                 10-OCT-05
+SVOLLMAN-650.123.4234                                6500
+
+ShelleyHiggins                                07-JUN-02
+SHIGGINS-515.123.8080                               12008
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+StevenKing                                    17-JUN-03
+SKING-515.123.4567                                  24000
+
+SusanMavris                                   07-JUN-02
+SMAVRIS-515.123.7777                                 6500
+
+ValliPataballa                                05-FEB-06
+VPATABAL-590.423.4560                                4800
+
+
+FULL_NAME                                     HIRE_DATE COMMISSION_PCT
+--------------------------------------------- --------- --------------
+CONTACT_DETAILS                                    SALARY
+---------------------------------------------- ----------
+WilliamGietz                                  07-JUN-02
+WGIETZ-515.123.8181                                  8300
+
+
+25 rows selected.
+
+
+12) SQL> SELECT EMPLOYEE_ID,COUNT(END_DATE) AS TOTAL_JOBS FROM JOB_HISTORY GROUP BY EMPLOYEE_ID;
+
+EMPLOYEE_ID TOTAL_JOBS
+----------- ----------
+        101          2
+        102          1
+        114          1
+        122          1
+        176          2
+        200          2
+        201          1
+
+7 rows selected.
+
+
+13) SQL> SELECT EMPLOYEE_ID FROM JOB_HISTORY GROUP BY EMPLOYEE_ID HAVING COUNT(*) >=2;
+
+EMPLOYEE_ID
+-----------
+        101
+        176
+        200
+ 
+14) SQL> SELECT JOB_ID,COUNT(*),SUM(SALARY),MAX(SALARY)-MIN(SALARY) AS SALARY_DIFFERENCE FROM EMPLOYEES GROUP BY JOB_ID;
+
+JOB_ID       COUNT(*) SUM(SALARY) SALARY_DIFFERENCE
+---------- ---------- ----------- -----------------
+IT_PROG             5       28800              4800
+AC_MGR              1       12008                 0
+AC_ACCOUNT          1        8300                 0
+ST_MAN              5       36400              2400
+PU_MAN              1       11000                 0
+AD_ASST             1        4400                 0
+AD_VP               2       34000                 0
+SH_CLERK           20       64300              1700
+FI_ACCOUNT          5       39600              2100
+FI_MGR              1       12008                 0
+PU_CLERK            5       13900               600
+
+JOB_ID       COUNT(*) SUM(SALARY) SALARY_DIFFERENCE
+---------- ---------- ----------- -----------------
+SA_MAN              5       61000              3500
+MK_MAN              1       13000                 0
+PR_REP              1       10000                 0
+AD_PRES             1       24000                 0
+SA_REP             30      250500              5400
+MK_REP              1        6000                 0
+ST_CLERK           20       55700              1500
+HR_REP              1        6500                 0
+
+19 rows selected.
+
+
+15) SQL> SELECT JOB_ID FROM JOB_HISTORY WHERE END_DATE - START_DATE > 300 GROUP BY JOB_ID HAVING COUNT(*)>=2;
+
+JOB_ID
+----------
+AC_ACCOUNT
+ST_CLERK
+
+
+16) SQL> SELECT COUNTRY_ID,COUNT(*) FROM LOCATIONS GROUP BY COUNTRY_ID;
+
+CO   COUNT(*)
+-- ----------
+US          4
+SG          1
+CA          2
+CH          2
+IT          2
+MX          1
+CN          1
+DE          1
+JP          2
+IN          1
+AU          1
+
+CO   COUNT(*)
+-- ----------
+UK          3
+BR          1
+NL          1
+
+14 rows selected.
+
+
+17) SQL> SELECT MANAGER_ID,COUNT(*) FROM EMPLOYEES GROUP BY MANAGER_ID;
+
+MANAGER_ID   COUNT(*)
+---------- ----------
+                    1
+       100         14
+       123          8
+       120          8
+       121          8
+       147          6
+       108          5
+       148          6
+       149          6
+       205          1
+       102          1
+
+MANAGER_ID   COUNT(*)
+---------- ----------
+       201          1
+       101          5
+       114          5
+       124          8
+       145          6
+       146          6
+       103          4
+       122          8
+
+19 rows selected.
+
+
+18) SQL> SELECT DEPARTMENT_ID,AVG(SALARY) FROM EMPLOYEES WHERE COMMISSION_PCT IS NOT NULL GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID AVG(SALARY)
+------------- -----------
+                     7000
+           80  8955.88235
+
+19) SQL> SELECT DEPARTMENT_ID,MANAGER_ID,COUNT(*) AS TOTAL_EMPLOYEES FROM EMPLOYEES GROUP BY DEPARTMENT_ID,MANAGER_ID HAVING COUNT(*) >=4;
+
+DEPARTMENT_ID MANAGER_ID TOTAL_EMPLOYEES
+------------- ---------- ---------------
+           60        103               4
+           80        146               6
+           80        145               6
+           80        149               5
+           50        122               8
+           50        100               5
+           50        121               8
+           50        123               8
+           80        147               6
+           50        120               8
+           50        124               8
+
+DEPARTMENT_ID MANAGER_ID TOTAL_EMPLOYEES
+------------- ---------- ---------------
+           80        148               6
+          100        108               5
+           30        114               5
+           80        100               5
+
+15 rows selected.
+
+
+20) SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES WHERE COMMISSION_PCT IS NOT NULL GROUP BY DEPARTMENT_ID HAVING COUNT(COMMISSION_PCT) > 10;
+
+DEPARTMENT_ID
+-------------
+           80
+
+
+21) SQL> SELECT EMPLOYEE_ID,END_DATE FROM JOB_HISTORY;
+
+EMPLOYEE_ID END_DATE
+----------- ---------
+        102 24-JUL-06
+        101 27-OCT-01
+        101 15-MAR-05
+        201 19-DEC-07
+        114 31-DEC-07
+        122 31-DEC-07
+        200 17-JUN-01
+        176 31-DEC-06
+        176 31-DEC-07
+        200 31-DEC-06
+
+10 rows selected.
+
+
+22) SQL> SELECT JOB_ID,AVG(SALARY) FROM EMPLOYEES GROUP BY JOB_ID HAVING AVG(SALARY) > 8000;
+
+JOB_ID     AVG(SALARY)
+---------- -----------
+AC_MGR           12008
+AC_ACCOUNT        8300
+PU_MAN           11000
+AD_VP            17000
+FI_MGR           12008
+SA_MAN           12200
+MK_MAN           13000
+PR_REP           10000
+AD_PRES          24000
+SA_REP            8350
+
+10 rows selected.
+
+
+23) SQL> SELECT JOB_TITLE,MAX_SALARY - MIN_SALARY AS SALARY_DIFFERENCE FROM JOBS WHERE MAX_SALARY BETWEEN 12000 AND 18000;
+
+JOB_TITLE                           SALARY_DIFFERENCE
+----------------------------------- -----------------
+Finance Manager                                  7800
+Accounting Manager                               7800
+Sales Representative                             6008
+Purchasing Manager                               7000
+Marketing Manager                                6000
+
+
+24)  SQL> SELECT * FROM JOBS WHERE MIN_SALARY > 9000;
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+AD_PRES    President                                20080      40000
+AD_VP      Administration Vice President            15000      30000
+SA_MAN     Sales Manager                            10000      20080

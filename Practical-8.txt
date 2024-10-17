@@ -1,0 +1,437 @@
+1. Write a script to calculate factorial of given number.
+
+declare 
+	fac number :=1;  
+	n number := &1; 
+begin			 
+	while n > 0 loop  
+	fac:=n*fac;		 
+	n:=n-1;		 
+	end loop;		  
+	dbms_output.put_line(fac);  
+end;			 
+/
+
+output :
+Enter value for 1: 5
+old   3: n number := &1;
+new   3: n number := 5;
+120
+
+
+
+2. Write a script to calculate factorial of given number using reverse for loop.
+
+
+
+
+
+
+3. Write a script to display all palindrome numbers between 0 and 99999
+for example: 0, 1, 2, 3, 22, 121, 24742
+
+DECLARE
+  num NUMBER;
+  rev NUMBER;
+  temp NUMBER;
+BEGIN
+  FOR num IN 0..99999 LOOP
+    temp := num;
+    rev := 0;
+    WHILE temp > 0 LOOP
+      rev := rev * 10 + MOD(temp, 10);
+      temp := TRUNC(temp / 10);
+    END LOOP;
+    IF num = rev THEN
+      DBMS_OUTPUT.PUT_LINE(num);
+    END IF;
+  END LOOP;
+END;
+/
+
+output:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+11
+
+4. Write a script to display all fibonacci series numbers under 9999.
+0,1,1,2,3,5,8,13,21,34,…
+
+DECLARE
+  num1 NUMBER := 0;
+  num2 NUMBER := 1;
+  next_num NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE(num1);
+  DBMS_OUTPUT.PUT_LINE(num2);
+  WHILE num2 < 9999 LOOP
+    next_num := num1 + num2;
+    DBMS_OUTPUT.PUT_LINE(next_num);
+    num1 := num2;
+    num2 := next_num;
+  END LOOP;
+END;
+/
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+6765
+10946
+
+5. Write a script to display a given number is backward direction.
+For example: 12345 → 54321
+
+DECLARE
+  num NUMBER := &num;  
+  rev NUMBER := 0;
+  temp NUMBER := num;
+BEGIN
+  WHILE temp > 0 LOOP
+    rev := rev * 10 + MOD(temp, 10);
+    temp := TRUNC(temp / 10);
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Reverse of ' || num || ' is ' || rev);
+END;
+/
+output:
+Enter value for num: 12345
+old   2:   num NUMBER := &num;
+new   2:   num NUMBER := 12345;
+Reverse of 12345 is 54321
+
+
+
+6. To calculate the area of a circle, you must square the circle’s radius and
+then multiply it by π. Write a program that calculates the area of a circle.
+The value for the radius should be provided with the help of a substitution
+variable. Use 3.14 for the value of π. After the area of the circle is
+calculated, display it on the screen.
+
+DECLARE
+  radius NUMBER := &num; 
+  pi CONSTANT NUMBER := 3.14;
+  area NUMBER;
+BEGIN
+  area := pi * radius * radius;
+  DBMS_OUTPUT.PUT_LINE('The area of the circle is: ' || area);
+END;
+/
+
+
+output:
+Enter value for num: 5
+old   2:   radius NUMBER := &num;
+new   2:   radius NUMBER := 5;
+The area of the circle is: 78.5
+
+
+7. Write a program to print first name and last name and take the input value
+from user.
+
+DECLARE
+  first_name VARCHAR2(30) := '&first_name';
+  last_name VARCHAR2(30) := '&last_name';
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('First Name: ' || first_name);
+  DBMS_OUTPUT.PUT_LINE('Last Name: ' || last_name);
+END;
+/
+
+output:
+Enter value for first_name: heet
+old   2:   first_name VARCHAR2(30) := '&first_name';
+new   2:   first_name VARCHAR2(30) := 'ken';
+Enter value for last_name: velani
+old   3:   last_name VARCHAR2(30) := '&last_name';
+new   3:   last_name VARCHAR2(30) := 'kaneki';
+First Name: ken
+Last Name: kaneki
+
+
+
+8. Write a program take the input value from user and display power of that
+number.
+
+
+DECLARE
+  base NUMBER := &base;
+  exponent NUMBER := &exponent;
+  result NUMBER := 1;
+BEGIN
+  IF exponent < 0 THEN
+    DBMS_OUTPUT.PUT_LINE('Exponent cannot be negative.');
+  ELSIF exponent = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('Power of ' || base || ' raised to 0 is 1');
+  ELSE
+    FOR i IN 1..exponent LOOP
+      result := result * base;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE(base || ' raised to the power of ' || exponent || ' is ' || result);
+  END IF;
+END;
+/
+
+output:
+Enter value for base: 2
+old   2:   base NUMBER := &base;
+new   2:   base NUMBER := 2;
+Enter value for exponent: 3
+old   3:   exponent NUMBER := &exponent;
+new   3:   exponent NUMBER := 3;
+2 raised to the power of 3 is 8
+
+
+
+
+
+9. Create a PL/SQL Block to test whether the date provided by the user falls
+on the weekend (in other words, if the day is Saturday or Sunday) (In this
+exercise, you use the IF-THEN statement).
+
+DECLARE
+  input_date DATE := TO_DATE('&input_date', 'DD-MM-YYYY');
+BEGIN
+  IF TO_CHAR(input_date, 'DY') IN ('SAT', 'SUN') THEN
+    DBMS_OUTPUT.PUT_LINE(input_date || ' is a weekend day.');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(input_date || ' is a weekday.');
+  END IF;
+END;
+/
+
+
+OUTPUT:
+Enter value for input_date: 19-12-2005
+old   2:   input_date DATE := TO_DATE('&input_date', 'DD-MM-YYYY');
+new   2:   input_date DATE := TO_DATE('09-11-2011', 'DD-MM-YYYY');
+09-NOV-11 is a weekday.
+
+
+
+
+
+13.Instead of getting information from the user for the variable v_date, define
+its value with the help of the function SYSDATE. After it has been
+determined that a certain day falls on the weekend, check to see if the time
+is before or after noon. Display the time of day together with the day.
+
+DECLARE
+  v_date DATE := SYSDATE;
+  v_day VARCHAR2(3) := TO_CHAR(v_date, 'DY');
+  v_time VARCHAR2(12) := TO_CHAR(v_date, 'HH24:MI:SS');
+BEGIN
+  IF v_day IN ('SAT', 'SUN') THEN
+    IF TO_NUMBER(SUBSTR(v_time, 1, 2)) < 12 THEN
+      DBMS_OUTPUT.PUT_LINE(v_date || ' is a weekend day before noon.');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE(v_date || ' is a weekend day after noon.');
+    END IF;
+  ELSE
+    DBMS_OUTPUT.PUT_LINE(v_date || ' is a weekday.');
+  END IF;
+END;
+/
+OUTPUT :
+13-AUG-24 is a weekday.
+
+
+
+
+
+14.Create a new script. For a given instructor, determine how many sections
+he or she is teaching. If the number is greater than or equal to 3, display a
+message saying that the instructor needs a vacation. Otherwise, display a
+message saying how many sections this instructor is teaching.
+
+DECLARE
+  instructor_id NUMBER := &instructor_id;
+  num_sections NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO num_sections
+  FROM student.section
+  WHERE instructor_id = instructor_id;
+
+  IF num_sections >= 3 THEN
+    DBMS_OUTPUT.PUT_LINE('Instructor ' || instructor_id || ' needs a vacation!');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Instructor ' || instructor_id || ' is teaching ' || num_sections || ' sections.');
+  END IF;
+END;
+/
+
+
+15.Execute the following two PL/SQL blocks, and explain why they produce
+different output for the same value of the variable v_num. Remember to
+issue the SET SERVEROUTPUT ON command before running this script.
+Block 1
+DECLARE
+v_num NUMBER := &NUM;
+BEGIN
+IF v_num > 0 THEN
+DBMS_OUTPUT.PUT_LINE (v_NUM||' is greater than 0');
+ELSE
+DBMS_OUTPUT.PUT_LINE (V_NUM||'is not greater than 0');
+END IF;
+END;
+/
+Block 2
+DECLARE
+v_num NUMBER := &NUM;
+BEGIN
+IF v_num > 2 THEN
+DBMS_OUTPUT.PUT_LINE (v_num||' is greater than 0');
+END IF;
+IF NOT (v_num > 2) THEN
+DBMS_OUTPUT.PUT_LINE (v_num ||'is not greater than 0');
+END IF;
+END;
+/
+
+
+Enter value for num: 4
+old   2: v_num NUMBER := &NUM;
+new   2: v_num NUMBER := 4;
+4 is greater than 0
+
+16. In this exercise, you use the CASE statement to display the name of a day
+on the screen based on the day’s number in the week. In other words, if the
+number of the day of the week is 3, it is Tuesday.
+
+DECLARE
+  day_number NUMBER := &day_number;
+  day_name VARCHAR2(9);
+BEGIN
+  CASE day_number
+    WHEN 1 THEN
+      day_name := 'Sunday';
+    WHEN 2 THEN
+      day_name := 'Monday';
+    WHEN 3 THEN
+      day_name := 'Tuesday';
+    WHEN 4 THEN
+      day_name := 'Wednesday';
+    WHEN 5 THEN
+      day_name := 'Thursday';
+    WHEN 6 THEN
+      day_name := 'Friday';
+    WHEN 7 THEN
+      day_name := 'Saturday';
+    ELSE
+      day_name := 'Invalid day number';
+  END CASE;
+
+  DBMS_OUTPUT.PUT_LINE('Day ' || day_number || ' is ' || day_name);
+END;
+/
+
+OUTPUT :
+Enter value for day_number: 5
+old   2:   day_number NUMBER := &day_number;
+new   2:   day_number NUMBER := 5;
+Day 5 is Thursday
+
+17.In this exercise you use a WHILE loop to calculate the sum of the integers
+between 1 and 10.
+
+DECLARE
+  i NUMBER := 1;
+  sum_N NUMBER := 0;
+BEGIN
+  WHILE (i <= 10) LOOP
+    sum_N := sum_N + i;
+    i := i + 1;
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('The sum of integers between 1 and 10 is: ' || sum_N);
+END;
+/
+
+OUTPUT :
+The sum of integers between 1 and 10 is: 55
+
+
+18.How would you change the script to calculate the sum of the even integers
+between 1 and 100? Write a Script.
+
+DECLARE
+  i NUMBER := 2;  
+  sum_N NUMBER := 0;
+BEGIN
+  WHILE i <= 100 LOOP
+    sum_N := sum_N + i;
+    i := i + 2;  
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('The sum of even integers between 1 and 100 is: ' || sum_N);
+END;
+/
+
+OUTPUT :
+The sum of even integers between 1 and 100 is: 2550
+
+
+
+
+19.In this exercise, you use a numeric FOR loop to calculate a factorial of 10
+(10! = 1*2*3...*10)
+DECLARE
+  n NUMBER := 10;
+  factorial NUMBER := 1;
+BEGIN
+  FOR i IN 2..n LOOP
+    factorial := factorial * i;
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('Factorial of ' || n || ' is ' || factorial);
+END;
+/
+
+
+
+OUTPUT: Factorial Of 10 is 3628800
+
+
+
+
+
+
+20.Rewrite the above script using the REVERSE option
+
+
+
+DECLARE
+  n NUMBER := 10;
+  result NUMBER := 1;
+BEGIN
+  FOR i IN 2..n LOOP
+    result := result * i;
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('Factorial of ' || n || ' is ' || result);
+END;
+/

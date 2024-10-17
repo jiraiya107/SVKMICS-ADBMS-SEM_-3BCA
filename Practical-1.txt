@@ -1,0 +1,677 @@
+1) List all the tables of HR schema (Select * from tab;)
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+COUNTRIES                      TABLE
+DEPARTMENTS                    TABLE
+EMPLOYEES                      TABLE
+EMP_DETAILS_VIEW               VIEW
+JOBS                           TABLE
+JOB_HISTORY                    TABLE
+LOCATIONS                      TABLE
+REGIONS                        TABLE
+
+8 rows selected.
+2) See the description of all the tables of HR Schema
+SQL> Desc departments;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPARTMENT_ID                             NOT NULL NUMBER(4)
+ DEPARTMENT_NAME                           NOT NULL VARCHAR2(30)
+ MANAGER_ID                                         NUMBER(6)
+ LOCATION_ID                                        NUMBER(4)
+
+
+3) Find number of records for each of the table of HR schema
+SQL> -- COUNTRIES
+SQL> SELECT COUNT(*) FROM HR.COUNTRIES;
+
+  COUNT(*)
+----------
+        25
+
+SQL>
+SQL> -- LOCATIONS
+SQL> SELECT COUNT(*) FROM HR.LOCATIONS;
+
+  COUNT(*)
+----------
+        23
+
+SQL>
+SQL> -- DEPARTMENTS
+SQL> SELECT COUNT(*) FROM HR.DEPARTMENTS;
+
+  COUNT(*)
+----------
+        27
+
+SQL>
+SQL> -- JOBS
+SQL> SELECT COUNT(*) FROM HR.JOBS;
+
+  COUNT(*)
+----------
+        19
+
+SQL>
+SQL> -- EMPLOYEES
+SQL> SELECT COUNT(*) FROM HR.EMPLOYEES;
+
+  COUNT(*)
+----------
+       107
+
+SQL>
+SQL> -- JOB_HISTORY
+SQL> SELECT COUNT(*) FROM HR.JOB_HISTORY;
+
+  COUNT(*)
+----------
+        10
+
+4) Prepare Department-wise list of employees with following details
+
+Department_name, First_name, Last_name, Salary
+
+
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    E.FIRST_NAME,
+  4    E.LAST_NAME,
+  5    E.SALARY
+  6  FROM
+  7    HR.EMPLOYEES E
+  8    JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+  9  ORDER BY
+ 10    D.DEPARTMENT_NAME, E.LAST_NAME;
+
+DEPARTMENT_NAME                FIRST_NAME           LAST_NAME
+------------------------------ -------------------- -------------------------
+    SALARY
+----------
+Accounting                     William              Gietz
+      8300
+
+Accounting                     Shelley              Higgins
+     12008
+
+Administration                 Jennifer             Whalen
+      4400
+106   row selected
+
+5) Sort the above list by Department_name, First_name and Last_name (Using order by)
+
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    E.FIRST_NAME,
+  4    E.LAST_NAME,
+  5    E.SALARY
+  6  FROM
+  7    HR.EMPLOYEES E
+  8    JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+  9  ORDER BY
+ 10    D.DEPARTMENT_NAME,
+ 11    E.FIRST_NAME,
+ 12    E.LAST_NAME;
+
+DEPARTMENT_NAME                FIRST_NAME           LAST_NAME
+------------------------------ -------------------- -------------------------
+    SALARY
+----------
+Accounting                     Shelley              Higgins
+     12008
+
+Accounting                     William              Gietz
+      8300
+
+Administration                 Jennifer             Whalen
+      4400
+ 106 row connected
+
+6) Prepare department wise list of employees along with the name of their manager.
+
+ie. Department name, employee's first name, employee's last name, manager's first name, manager's last name
+
+
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    E.FIRST_NAME,
+  4    E.LAST_NAME,
+  5    M.FIRST_NAME AS MANAGER_FIRST_NAME,
+  6    M.LAST_NAME AS MANAGER_LAST_NAME
+  7  FROM
+  8    HR.EMPLOYEES E
+  9    JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+ 10    LEFT JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+ 11  ORDER BY
+ 12    D.DEPARTMENT_NAME,
+ 13    E.LAST_NAME;
+
+DEPARTMENT_NAME                FIRST_NAME           LAST_NAME
+------------------------------ -------------------- -------------------------
+MANAGER_FIRST_NAME   MANAGER_LAST_NAME
+-------------------- -------------------------
+Accounting                     William              Gietz
+Shelley              Higgins
+
+Accounting                     Shelley              Higgins
+Neena                Kochhar
+
+Administration                 Jennifer             Whalen
+Neena                Kochhar
+
+
+7) Sort the above list by department and manager's name
+
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    E.FIRST_NAME,
+  4    E.LAST_NAME,
+  5    M.FIRST_NAME AS MANAGER_FIRST_NAME,
+  6    M.LAST_NAME AS MANAGER_LAST_NAME
+  7  FROM
+  8    HR.EMPLOYEES E
+  9    JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+ 10    LEFT JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+ 11  ORDER BY
+ 12    D.DEPARTMENT_NAME,
+ 13    M.LAST_NAME,
+ 14    M.FIRST_NAME,
+ 15    E.LAST_NAME;
+
+DEPARTMENT_NAME                FIRST_NAME           LAST_NAME
+------------------------------ -------------------- -------------------------
+MANAGER_FIRST_NAME   MANAGER_LAST_NAME
+-------------------- -------------------------
+Accounting                     William              Gietz
+Shelley              Higgins
+
+Accounting                     Shelley              Higgins
+Neena                Kochhar
+
+Administration                 Jennifer             Whalen
+Neena                Kochhar
+
+106 row collected
+
+
+8) Check the number of rows displayed in the above query.
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    COUNT(*) AS NUM_EMPLOYEES
+  4  FROM
+  5    HR.EMPLOYEES E
+  6    JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+  7    LEFT JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+  8  GROUP BY
+  9    D.DEPARTMENT_NAME
+ 10  ORDER BY
+ 11    D.DEPARTMENT_NAME;
+
+DEPARTMENT_NAME                NUM_EMPLOYEES
+------------------------------ -------------
+Accounting                                 2
+Administration                             1
+Executive                                  3
+Finance                                    6
+Human Resources                            1
+IT                                         5
+Marketing                                  2
+Public Relations                           1
+Purchasing                                 6
+Sales                                     34
+Shipping                                  45
+
+11 rows selected.
+
+9) Using outer join get all the employees in the above query.
+SQL> SELECT
+  2    D.DEPARTMENT_NAME,
+  3    E.FIRST_NAME,
+  4    E.LAST_NAME,
+  5    M.FIRST_NAME AS MANAGER_FIRST_NAME,
+  6    M.LAST_NAME AS MANAGER_LAST_NAME
+  7  FROM
+  8    HR.EMPLOYEES E
+  9    RIGHT OUTER JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+ 10    LEFT JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+ 11  ORDER BY
+ 12    D.DEPARTMENT_NAME,
+ 13    M.LAST_NAME,
+ 14    M.FIRST_NAME,
+ 15    E.LAST_NAME;
+
+DEPARTMENT_NAME                FIRST_NAME           LAST_NAME
+------------------------------ -------------------- -------------------------
+MANAGER_FIRST_NAME   MANAGER_LAST_NAME
+-------------------- -------------------------
+Accounting                     William              Gietz
+Shelley              Higgins
+
+Accounting                     Shelley              Higgins
+Neena                Kochhar
+
+Administration                 Jennifer             Whalen
+Neena                Kochhar
+
+122 row collected
+
+10) Write a query to get Department name wise sum of salary
+
+SELECT 
+  D.DEPARTMENT_NAME,
+  SUM(E.SALARY) AS TOTAL_SALARY
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+  D.DEPARTMENT_NAME
+ORDER BY 
+  TOTAL_SALARY DESC;
+
+DEPARTMENT_NAME                TOTAL_SALARY
+------------------------------ ------------
+Sales                                304500
+Shipping                             156400
+Executive                             58000
+Finance                               51608
+IT                                    28800
+Purchasing                            24900
+Accounting                            20308
+Marketing                             19000
+Public Relations                      10000
+Human Resources                        6500
+Administration                         4400
+
+11 rows selected.
+
+11) Write a query to get Department name wise sum, max, min, avg salary and no. of employees
+
+SELECT 
+  D.DEPARTMENT_NAME,
+  SUM(E.SALARY) AS TOTAL_SALARY,
+  MAX(E.SALARY) AS MAX_SALARY,
+  MIN(E.SALARY) AS MIN_SALARY,
+  AVG(E.SALARY) AS AVG_SALARY,
+  COUNT(E.EMPLOYEE_ID) AS NUM_EMPLOYEES
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+  D.DEPARTMENT_NAME
+ORDER BY 
+  TOTAL_SALARY DESC;
+
+DEPARTMENT_NAME                TOTAL_SALARY MAX_SALARY MIN_SALARY AVG_SALARY
+------------------------------ ------------ ---------- ---------- ----------
+NUM_EMPLOYEES
+-------------
+Sales                                304500      14000       6100 8955.88235
+           34
+
+Shipping                             156400       8200       2100 3475.55556
+           45
+
+Executive                             58000      24000      17000 19333.3333
+            3
+11 row collected
+
+12) Display the country name and number of cities that country have.
+
+SQL> SELECT
+  2    C.COUNTRY_NAME,
+  3    COUNT(LC.CITY) AS NUM_CITIES
+  4  FROM
+  5    HR.LOCATIONS L
+  6    JOIN HR.COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID
+  7    JOIN HR.LOCATIONS LC ON L.COUNTRY_ID = LC.COUNTRY_ID
+  8  GROUP BY
+  9    C.COUNTRY_NAME
+ 10  ORDER BY
+ 11    NUM_CITIES DESC;
+
+COUNTRY_NAME                             NUM_CITIES
+---------------------------------------- ----------
+United States of America                         16
+United Kingdom                                    9
+Japan                                             4
+Italy                                             4
+Switzerland                                       4
+Canada                                            4
+Mexico                                            1
+Singapore                                         1
+Netherlands                                       1
+India                                             1
+Germany                                           1
+
+COUNTRY_NAME                             NUM_CITIES
+---------------------------------------- ----------
+China                                             1
+Brazil                                            1
+Australia                                         1
+
+14 rows selected.
+
+
+13) Display the first name and hire date of the employees who joined between year 1992 and 1995.
+
+SQL> SELECT
+  2    FIRST_NAME,
+  3    HIRE_DATE
+  4  FROM
+  5    HR.EMPLOYEES
+  6  WHERE
+  7    EXTRACT(YEAR FROM HIRE_DATE) BETWEEN 1992 AND 1995
+  8  ORDER BY
+  9    HIRE_DATE;
+
+no rows selected
+
+
+14) Display the last name of employee where last name contains  's' as 3rd alphabet.
+SELECT 
+  LAST_NAME
+FROM 
+  HR.EMPLOYEES
+WHERE 
+  SUBSTR(LAST_NAME, 3, 1) = 'S';
+
+no rows selected
+
+15) Display manager name and number of employees managed by the manager. 
+
+SELECT 
+  M.FIRST_NAME || ' ' || M.LAST_NAME AS MANAGER_NAME,
+  COUNT(E.EMPLOYEE_ID) AS NUMBER_OF_EMPLOYEES
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.EMPLOYEES M ON E.MANAGER_ID = M.EMPLOYEE_ID
+GROUP BY 
+  M.FIRST_NAME, M.LAST_NAME
+ORDER BY 
+  NUMBER_OF_EMPLOYEES DESC;
+
+MANAGER_NAME                                   NUMBER_OF_EMPLOYEES
+---------------------------------------------- -------------------
+Steven King                                                     14
+Adam Fripp                                                       8
+Kevin Mourgos                                                    8
+Payam Kaufling                                                   8
+Shanta Vollman                                                   8
+Matthew Weiss                                                    8
+Gerald Cambrault                                                 6
+Karen Partners                                                   6
+John Russell                                                     6
+Alberto Errazuriz                                                6
+Eleni Zlotkey                                                    6
+
+MANAGER_NAME                                   NUMBER_OF_EMPLOYEES
+---------------------------------------------- -------------------
+Neena Kochhar                                                    5
+Nancy Greenberg                                                  5
+Den Raphaely                                                     5
+Alexander Hunold                                                 4
+Michael Hartstein                                                1
+Shelley Higgins                                                  1
+Lex De Haan                                                      1
+
+18 rows selected.
+
+16) Display the job title whose average salary is more than 10000.
+
+SELECT 
+  J.JOB_TITLE, 
+  AVG(E.SALARY) AS AVERAGE_SALARY
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.JOBS J ON E.JOB_ID = J.JOB_ID
+GROUP BY 
+  J.JOB_TITLE
+HAVING 
+  AVG(E.SALARY) > 10000;
+
+
+JOB_TITLE                           AVERAGE_SALARY
+----------------------------------- --------------
+Accounting Manager                           12008
+Administration Vice President                17000
+President                                    24000
+Finance Manager                              12008
+Purchasing Manager                           11000
+Marketing Manager                            13000
+Sales Manager                                12200
+
+7 rows selected.
+
+17) Display the firstname and lastname of employees where the first name or last name starts with 'S'.
+
+SELECT 
+  FIRST_NAME, 
+  LAST_NAME
+FROM 
+  HR.EMPLOYEES
+WHERE 
+  FIRST_NAME LIKE 'S%' OR LAST_NAME LIKE 'S%';
+
+FIRST_NAME           LAST_NAME
+-------------------- -------------------------
+Sundar               Ande
+Shelli               Baida
+Sarah                Bell
+Shelley              Higgins
+Steven               King
+Sundita              Kumar
+Steven               Markle
+Susan                Mavris
+Samuel               McCain
+Nandita              Sarchand
+Ismael               Sciarra
+
+FIRST_NAME           LAST_NAME
+-------------------- -------------------------
+John                 Seo
+Sarath               Sewall
+Lindsey              Smith
+William              Smith
+Stephen              Stiles
+Martha               Sullivan
+Patrick              Sully
+Sigal                Tobias
+Shanta               Vollman
+
+20 rows selected.
+
+
+(18)Display how many employees joined in each month of year 1994
+
+SELECT 
+  TO_CHAR(HIRE_DATE, 'Month') AS MONTH,
+  COUNT(*) AS NUMBER_OF_EMPLOYEES
+FROM 
+  HR.EMPLOYEES
+WHERE 
+  EXTRACT(YEAR FROM HIRE_DATE) = 1994
+GROUP BY 
+  TO_CHAR(HIRE_DATE, 'Month')
+ORDER BY 
+  TO_DATE(MONTH, 'Month');
+
+no rows selected
+
+(19) List the employee whose manager id is null.
+
+SELECT 
+  EMPLOYEE_ID, 
+  FIRST_NAME, 
+  LAST_NAME
+FROM 
+  HR.EMPLOYEES
+WHERE 
+  MANAGER_ID IS NULL;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME
+----------- -------------------- -------------------------
+        100 Steven               King
+
+20) List the employees who have joined in the month of 'MAY' during any year.
+
+SELECT 
+  EMPLOYEE_ID, 
+  FIRST_NAME, 
+  LAST_NAME, 
+  HIRE_DATE
+FROM 
+  HR.EMPLOYEES
+WHERE 
+  TO_CHAR(HIRE_DATE, 'Month') = 'MAY';
+
+no rows selected
+
+(21) List all the employees and their experience in terms of no. of years
+
+SELECT 
+  EMPLOYEE_ID, 
+  FIRST_NAME, 
+  LAST_NAME, 
+  TRUNC(MONTHS_BETWEEN(SYSDATE, HIRE_DATE) / 12) AS EXPERIENCE_IN_YEARS
+FROM 
+  HR.EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME           LAST_NAME                 EXPERIENCE_IN_YEARS
+----------- -------------------- ------------------------- -------------------
+        100 Steven               King                                       21
+        101 Neena                Kochhar                                    18
+        102 Lex                  De Haan                                    23
+        103 Alexander            Hunold                                     18
+        104 Bruce                Ernst                                      17
+        105 David                Austin                                     19
+        106 Valli                Pataballa                                  18
+        107 Diana                Lorentz                                    17
+        108 Nancy                Greenberg                                  21
+        109 Daniel               Faviet                                     21
+        110 John                 Chen                                       18
+107 row collected
+
+
+(22) Display name of managers who manages more than five employees.
+
+SELECT 
+  M.FIRST_NAME, 
+  M.LAST_NAME
+FROM 
+  HR.EMPLOYEES M
+WHERE 
+  M.EMPLOYEE_ID IN (
+    SELECT 
+      E.MANAGER_ID
+    FROM 
+      HR.EMPLOYEES E
+    GROUP BY 
+      E.MANAGER_ID
+    HAVING 
+      COUNT(E.EMPLOYEE_ID) > 5
+  );
+
+FIRST_NAME           LAST_NAME
+-------------------- -------------------------
+Matthew              Weiss
+Gerald               Cambrault
+Kevin                Mourgos
+Shanta               Vollman
+Eleni                Zlotkey
+Alberto              Errazuriz
+Steven               King
+Adam                 Fripp
+John                 Russell
+Payam                Kaufling
+Karen                Partners
+
+11 rows selected.
+
+(23)Display firstname and department name whose working in sales, finance and shipping department.
+
+SELECT 
+  E.FIRST_NAME, 
+  D.DEPARTMENT_NAME
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+WHERE 
+  D.DEPARTMENT_NAME IN ('Sales', 'Finance', 'Shipping');
+
+FIRST_NAME           DEPARTMENT_NAME
+-------------------- ------------------------------
+Matthew              Shipping
+Adam                 Shipping
+Payam                Shipping
+Shanta               Shipping
+Kevin                Shipping
+Julia                Shipping
+Irene                Shipping
+James                Shipping
+Steven               Shipping
+Laura                Shipping
+Mozhe                Shipping
+
+85 row selected
+
+(24) Display department no, department name with total no of employees belonging to each department.
+
+SELECT 
+  D.DEPARTMENT_ID,
+  D.DEPARTMENT_NAME,
+  COUNT(E.EMPLOYEE_ID) AS TOTAL_EMPLOYEES
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+  D.DEPARTMENT_ID, 
+  D.DEPARTMENT_NAME
+ORDER BY 
+  TOTAL_EMPLOYEES DESC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                TOTAL_EMPLOYEES
+------------- ------------------------------ ---------------
+           50 Shipping                                    45
+           80 Sales                                       34
+          100 Finance                                      6
+           30 Purchasing                                   6
+           60 IT                                           5
+           90 Executive                                    3
+           20 Marketing                                    2
+          110 Accounting                                   2
+           40 Human Resources                              1
+           70 Public Relations                             1
+           10 Administration                               1
+
+11 rows selected.
+
+(25) Display total employees for each job title in each department.
+
+SELECT 
+  D.DEPARTMENT_NAME,
+  E.JOB_TITLE,
+  COUNT(E.EMPLOYEE_ID) AS TOTAL_EMPLOYEES
+FROM 
+  HR.EMPLOYEES E
+  JOIN HR.DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY 
+  D.DEPARTMENT_NAME, 
+  E.JOB_TITLE
+ORDER BY 
+  D.DEPARTMENT_NAME, 
+  TOTAL_EMPLOYEES DESC;
+
+
+DEPARTMENT_NAME  JOB_TITLE          TOTAL_EMPLOYEES
+--------------  -----------------  ---------------
+Executive       President           1
+Executive       Administrative Assistant 2
+Finance         Financial Analyst    3
+Finance         Accountant           2
+Accounting      Accountant           2
+Accounting      Accounting Manager   1
+Treasury        Treasurer           1
+Treasury        Financial Analyst    1

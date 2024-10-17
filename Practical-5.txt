@@ -1,0 +1,67 @@
+1) SQL> connect sys as sysdba
+Enter password:
+Connected.
+
+2) SQL> create user student identified by student;
+
+User created.
+
+3) SQL> grant connect to student;
+
+Grant succeeded.
+
+SQL> grant resource to student;
+
+Grant succeeded.
+
+
+4) SQL> create table DEPARTMENT(DEPT_NO INT,D_NAME VARCHAR(15),LOC VARCHAR(15));
+
+Table created.
+
+SQL> CREATE TABLE EMPLOYEE(EMP_NO INT,E_NAME VARCHAR(15),JOB VARCHAR(10),MGR INT,HIRE_DATE DATE,SAL INT,COMM FLOAT,DEPT_NO INT);
+
+Table created.
+
+
+5)  SQL> INSERT INTO DEPARTMENT VALUES(10,'SALES','NEW YORK');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(20,'PURCHASE','BOSTON');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(30,'ACCOUNT','CHICAGO');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(40,'FINANCE','NEW YORK');
+
+1 row created. 
+SQL> INSERT INTO DEPARTMENT VALUES(40,'FINANCE','INDIA');
+
+1 row created.
+
+
+6)SQL> INSERT INTO EMPLOYEE VALUES (1,'JOHN','AD_PRES',NULL,'17-JUN-87',24000,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (2,'KING','AD_VP',1,'21-JUN-88',17000,0.25,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (3,'KOCHHAR','AD_VP',1,'13-JAN-90',17000,NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (4,'HUNOLD','IT_PROG',2,'09-JAN-93',9000,NULL,40);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES (5,'REBAKA','IT_PROG',3,'10-FEB-95',10000,NULL,50);
+
+1 row created.
+
+7) 
